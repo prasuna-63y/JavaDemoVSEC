@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Popular Books</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<h1>Popular Books</h1>
+
+<div class="carousel-container">
+  <button class="nav-button" onclick="prevSlide()">❮</button>
+
+  <div class="carousel-slide" id="carousel">
+    <div class="slide">
+      <img src="abdul.jpg" alt="Wings of Fire">
+      <div class="text">
+        <h2>Wings of Fire</h2>
+        <p>An Autobiography of Abdul Kalam</p>
+        <p>by Arun Tiwari</p>
+        <button onclick="showDescription('Wings of Fire', 'This book tells the story of Dr. A.P.J. Abdul Kalam’s journey from a small boy in Rameswaram to becoming the Missile Man of India.')">Read Now</button>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="harry.jpg" alt="Harry Potter">
+      <div class="text">
+        <h2>Harry Potter</h2>
+        <p>A magical story</p>
+        <p>by J.K. Rowling</p>
+        <button onclick="showDescription('Harry Potter', 'A young wizard, Harry, discovers his magical legacy and battles the dark wizard Voldemort.')">Read Now</button>
+      </div>
+    </div>
+
+    <div class="slide">
+      <img src="chethan.jpg" alt="3 Mistakes of My Life">
+      <div class="text">
+        <h2>3 Mistakes of My Life</h2>
+        <p>by Chetan Bhagat</p>
+        <button onclick="showDescription('3 Mistakes of My Life', 'The book narrates the story of three friends and their struggles with ambition, love, and friendship.')">Read Now</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="nav-button" onclick="nextSlide()">❯</button>
+</div>
+
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="book-title"></h2>
+    <p id="book-description"></p>
+  </div>
+</div>
+
+<script>
+  let currentIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+
+  function updateCarousel() {
+    const carousel = document.getElementById('carousel');
+    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+
+  function showDescription(title, description) {
+    document.getElementById('book-title').textContent = title;
+    document.getElementById('book-description').textContent = description;
+    document.getElementById('modal').style.display = 'block';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
